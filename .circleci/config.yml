@@ -37,9 +37,9 @@ jobs:
        - attach_workspace:
            at: .
        - setup_remote_docker
-       - run: ci/docker_build.sh
-       - run: ci/docker_push.sh
-       - run: ci/docker_tag.sh
+       - run: DOCKER_IMAGE_PREFIX=nextdoor/envoy ci/docker_build.sh
+       - run: DOCKER_IMAGE_PREFIX=nextdoor/envoy ci/docker_push.sh
+       - run: DOCKER_IMAGE_PREFIX=nextdoor/envoy ci/docker_tag.sh
    asan:
      executor: ubuntu-build
      steps:
@@ -199,7 +199,3 @@ workflows:
       - format
       - clang_tidy
       - build_image
-      - docs:
-          filters:
-            tags:
-              only: /^v.*/
