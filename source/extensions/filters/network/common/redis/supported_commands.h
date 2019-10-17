@@ -81,6 +81,10 @@ struct SupportedCommands {
         "zadd", "zincrby", "touch", "zpopmin", "zpopmax", "zrem", "zremrangebylex",
         "zremrangebyrank", "zremrangebyscore", "unlink");
   }
+
+  static bool isReadCommand(const std::string& command) {
+    return !writeCommands().contains(command);
+  }
 };
 
 } // namespace Redis
