@@ -118,7 +118,6 @@ void ClientImpl::flushBufferAndResetTimer() {
 }
 
 PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& callbacks) {
-  ENVOY_LOG(info, this->host_->address()->asString());
   ASSERT(connection_->state() == Network::Connection::State::Open);
 
   const bool empty_buffer = encoder_buffer_.length() == 0;
@@ -197,7 +196,6 @@ void ClientImpl::putOutlierEvent(Upstream::Outlier::Result result) {
 }
 
 void ClientImpl::onEvent(Network::ConnectionEvent event) {
-  ENVOY_LOG(info, this->host_->address()->asString());
   if (event == Network::ConnectionEvent::RemoteClose ||
       event == Network::ConnectionEvent::LocalClose) {
 
@@ -245,7 +243,6 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
   // Cache hit
   if (value != nullptr) {
-    ENVOY_LOG(info, "onCacheResponse: cache hit");
     if (config_.enableCommandStats()) {
       pending_request->command_request_timer_->complete();
     }
@@ -267,7 +264,6 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
     putOutlierEvent(Upstream::Outlier::Result::ExtOriginRequestSuccess);
   } else {
-    ENVOY_LOG(info, "onCacheResponse: cache miss");
     const bool empty_buffer = encoder_buffer_.length() == 0;
 
     if (canceled) {
@@ -309,9 +305,7 @@ void ClientImpl::onCacheClose() {
 }
 
 void ClientImpl::onRespValue(RespValuePtr&& value) {
-  ENVOY_LOG(info, this->host_->address()->asString());
   if (cache_ && value->type() == Common::Redis::RespType::Push && PushResponse::get().INVALIDATE == value->asArray()[0].asString()) {
-    ENVOY_LOG(trace, "recieved invalidate");
     // TODO(slava): loop over second array?
     cache_->expire(value->asArray()[1].asArray()[0].asString());
     return;
