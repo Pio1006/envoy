@@ -85,6 +85,7 @@ void CacheImpl::onEvent(Network::ConnectionEvent event) {
 }
 
 CacheImpl::~CacheImpl() {
+    ENVOY_LOG(info, "ClientImpl::~CacheImpl: {}");
     this->client_->close();
 }
 

@@ -102,13 +102,17 @@ ClientImpl::ClientImpl(Upstream::HostConstSharedPtr host, Event::Dispatcher& dis
 }
 
 ClientImpl::~ClientImpl() {
+  ENVOY_LOG(info, "ClientImpl::~ClientImpl: {}", this->host_->address()->asString());
   ASSERT(pending_requests_.empty());
   ASSERT(connection_->state() == Network::Connection::State::Closed);
   host_->cluster().stats().upstream_cx_active_.dec();
   host_->stats().cx_active_.dec();
 }
 
-void ClientImpl::close() { connection_->close(Network::ConnectionCloseType::NoFlush); }
+void ClientImpl::close() {
+  ENVOY_LOG(info, "ClientImpl::close: {}", this->host_->address()->asString());
+  connection_->close(Network::ConnectionCloseType::NoFlush);
+}
 
 void ClientImpl::flushBufferAndResetTimer() {
   if (flush_timer_->enabled()) {
@@ -118,6 +122,7 @@ void ClientImpl::flushBufferAndResetTimer() {
 }
 
 PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& callbacks) {
+  ENVOY_LOG(info, "ClientImpl::makeRequest: {}", this->host_->address()->asString());
   ASSERT(connection_->state() == Network::Connection::State::Open);
 
   const bool empty_buffer = encoder_buffer_.length() == 0;
@@ -196,9 +201,10 @@ void ClientImpl::putOutlierEvent(Upstream::Outlier::Result result) {
 }
 
 void ClientImpl::onEvent(Network::ConnectionEvent event) {
+  ENVOY_LOG(info, "ClientImpl::onEvent: {}", this->host_->address()->asString());
   if (event == Network::ConnectionEvent::RemoteClose ||
       event == Network::ConnectionEvent::LocalClose) {
-
+    ENVOY_LOG(info, "ClientImpl::onEvent: close {}", this->host_->address()->asString());
     Upstream::reportUpstreamCxDestroy(host_, event);
     if (!pending_requests_.empty()) {
       Upstream::reportUpstreamCxDestroyActiveRequest(host_, event);
@@ -239,6 +245,7 @@ void ClientImpl::onEvent(Network::ConnectionEvent event) {
 }
 
 void ClientImpl::onCacheResponse(RespValuePtr&& value) {
+  ENVOY_LOG(info, "ClientImpl::onCacheResponse: {}", this->host_->address()->asString());
   ASSERT(!pending_cache_requests_.empty());
 
   PendingRequestPtr pending_request = std::move(pending_cache_requests_.front());
@@ -306,11 +313,13 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 }
 
 void ClientImpl::onCacheClose() {
+  ENVOY_LOG(info, "ClientImpl::onCacheClose: {}", this->host_->address()->asString());
   // Propagate the close
   this->close();
 }
 
 void ClientImpl::onRespValue(RespValuePtr&& value) {
+  ENVOY_LOG(info, "ClientImpl::onRespValue: {}", this->host_->address()->asString());
   if (cache_ && value->type() == Common::Redis::RespType::Push && PushResponse::get().INVALIDATE == value->asArray()[0].asString()) {
     // TODO(slava): loop over second array?
     cache_->expire(value->asArray()[1].asArray()[0].asString());
@@ -320,6 +329,8 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
   ASSERT(!pending_requests_.empty());
   PendingRequestPtr request = std::move(pending_requests_.front());
   const bool canceled = request->canceled_;
+  ENVOY_LOG(info, "ClientImpl::onRespValue: {}", this->host_->address()->asString());
+
 
   if (config_.enableCommandStats()) {
     bool success = !canceled && (value->type() != Common::Redis::RespType::Error);
@@ -343,6 +354,7 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
       // MOVED and ASK redirection errors have the following substrings: MOVED or ASK (err[0]), hash
       // key slot (err[1]), and IP address and TCP port separated by a colon (err[2])
       if (err[0] == RedirectionResponse::get().MOVED || err[0] == RedirectionResponse::get().ASK) {
+        ENVOY_LOG(info, "ClientImpl::onRespValue moved: {}", this->host_->address()->asString());
         redirected = true;
         bool redirect_succeeded = callbacks.onRedirection(std::move(value), std::string(err[2]),
                                                           err[0] == RedirectionResponse::get().ASK);
@@ -355,8 +367,10 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
     }
     if (!redirected) {
       if (err[0] == RedirectionResponse::get().CLUSTER_DOWN) {
+        ENVOY_LOG(info, "ClientImpl::onRespValue cluster down: {}", this->host_->address()->asString());
         callbacks.onFailure();
       } else {
+        ENVOY_LOG(info, "ClientImpl::onRespValue not redirect response: {}", this->host_->address()->asString());
         callbacks.onResponse(std::move(value));
       }
     }
@@ -410,6 +424,7 @@ void ClientImpl::PendingRequest::cancel() {
 }
 
 void ClientImpl::initialize(const std::string& auth_username, const std::string& auth_password) {
+  ENVOY_LOG(info, "ClientImpl::initialize: {}", this->host_->address()->asString());
   if (!auth_username.empty()) {
     // Send an AUTH command to the upstream server with username and password.
     Utility::AuthRequest auth_request(auth_username, auth_password);
@@ -464,7 +479,6 @@ ClientPtr ClientFactoryImpl::create(Upstream::HostConstSharedPtr host,
                                     Upstream::HostConstSharedPtr cache_host) {
   CachePtr cp = nullptr;
   if (cache_host != nullptr) {
-    // TODO(slava): use config from config file
     auto cache_config = new ConfigImpl(createConnPoolSettings(20, true, false));
     ClientPtr cache_client = ClientImpl::create(cache_host, dispatcher, EncoderPtr{new EncoderImpl(RespVersion::Resp3)},
                                       decoder_factory_, *cache_config, redis_command_stats, cache_host->cluster().statsScope(), nullptr);
