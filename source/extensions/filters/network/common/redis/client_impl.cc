@@ -12,6 +12,7 @@
 #include "envoy/extensions/filters/network/redis_proxy/v3/redis_proxy.pb.h"
 #include "extensions/filters/network/common/redis/codec.h"
 #include "extensions/filters/network/common/redis/utility.h"
+#include <cstddef>
 #include <memory>
 #include <optional>
 #include <string>
@@ -122,7 +123,7 @@ void ClientImpl::flushBufferAndResetTimer() {
 }
 
 PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& callbacks) {
-  ENVOY_LOG(info, "ClientImpl::makeRequest: {}", this->host_->address()->asString());
+  ENVOY_LOG(info, "ClientImpl::makeRequest: {} {}", this->host_->address()->asString(), request.toString());
   ASSERT(connection_->state() == Network::Connection::State::Open);
 
   const bool empty_buffer = encoder_buffer_.length() == 0;
@@ -140,6 +141,7 @@ PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& 
 
   if (cache_ && request.type() == RespType::Array &&
         absl::AsciiStrToLower(request.asArray()[0].asString()) == "get") {
+    ENVOY_LOG(info, "ClientImpl::makeRequest: {} checking cache for {}", this->host_->address()->asString(), request.toString());
     pending_cache_requests_.push_back(std::move(prp));
     cache_->makeCacheRequest(request);
     return pending_cache_requests_.back().get();
@@ -247,7 +249,6 @@ void ClientImpl::onEvent(Network::ConnectionEvent event) {
 }
 
 void ClientImpl::onCacheResponse(RespValuePtr&& value) {
-  ENVOY_LOG(info, "ClientImpl::onCacheResponse: {}", this->host_->address()->asString());
   ASSERT(!pending_cache_requests_.empty());
 
   PendingRequestPtr pending_request = std::move(pending_cache_requests_.front());
@@ -260,6 +261,7 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
   // Cache hit
   if (value != nullptr) {
+    ENVOY_LOG(info, "ClientImpl::onCacheResponse: {} HIT {}", this->host_->address()->asString(), pending_request->request_.toString());
     if (config_.enableCommandStats()) {
       pending_request->command_request_timer_->complete();
     }
@@ -281,6 +283,7 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
     putOutlierEvent(Upstream::Outlier::Result::ExtOriginRequestSuccess);
   } else {
+    ENVOY_LOG(info, "ClientImpl::onCacheResponse: {} MISS {}", this->host_->address()->asString(), pending_request->request_.toString());
     const bool empty_buffer = encoder_buffer_.length() == 0;
 
     if (canceled) {
@@ -321,9 +324,8 @@ void ClientImpl::onCacheClose() {
 }
 
 void ClientImpl::onRespValue(RespValuePtr&& value) {
-  ENVOY_LOG(info, "ClientImpl::onRespValue: {}", this->host_->address()->asString());
   if (cache_ && value->type() == Common::Redis::RespType::Push && PushResponse::get().INVALIDATE == value->asArray()[0].asString()) {
-    ASSERT(value->asArray().size() == 2);
+    ENVOY_LOG(info, "ClientImpl::onRespValue: {} : invalidate {}", this->host_->address()->asString(), value->toString());
 
     if (value->asArray()[1].type() == Common::Redis::RespType::BulkString) {
       cache_->expire(value->asArray()[1].asArray()[0].asString());
@@ -340,7 +342,6 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
   PendingRequestPtr request = std::move(pending_requests_.front());
   const bool canceled = request->canceled_;
   ENVOY_LOG(info, "ClientImpl::onRespValue: {}", this->host_->address()->asString());
-
 
   if (config_.enableCommandStats()) {
     bool success = !canceled && (value->type() != Common::Redis::RespType::Error);
@@ -391,6 +392,10 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
       absl::AsciiStrToLower(request->request_.asArray()[0].asString()) == "get" &&
       (value->type() == RespType::SimpleString || value->type() == RespType::BulkString)) {
       cache_->set(request->request_.asArray()[1].asString(), value->asString());
+    } else {
+      if (cache_) {
+        ENVOY_LOG(info, "ClientImpl::onRespValue non-cachable: {} >>>>>>>>{}<<<<<<<<", this->host_->address()->asString(), request->request_.type());
+      }
     }
 
     callbacks.onResponse(std::move(value));
