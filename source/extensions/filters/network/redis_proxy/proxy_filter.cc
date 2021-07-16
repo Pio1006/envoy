@@ -133,6 +133,7 @@ void ProxyFilter::onResponse(PendingRequest& request, Common::Redis::RespValuePt
   // The response we got might not be in order, so flush out what we can. (A new response may
   // unlock several out of order responses).
   while (!pending_requests_.empty() && pending_requests_.front().pending_response_) {
+    ENVOY_LOG(info, "[ProxyFilter::onResponse] response: {}", pending_requests_.front().pending_response_->toString());
     encoder_->encode(*pending_requests_.front().pending_response_, encoder_buffer_);
     pending_requests_.pop_front();
   }

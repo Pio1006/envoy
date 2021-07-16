@@ -119,6 +119,7 @@ void ClientImpl::flushBufferAndResetTimer() {
 
 PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& callbacks) {
   ASSERT(connection_->state() == Network::Connection::State::Open);
+  ENVOY_LOG(info, "[ClientImpl::makeRequest] [{}] request: {}", this->host_->address()->asString() ,request.toString());
 
   const bool empty_buffer = encoder_buffer_.length() == 0;
 
@@ -254,6 +255,8 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
   // Cache hit
   if (value != nullptr) {
+    ENVOY_LOG(info, "[ClientImpl::onRespValue] [{}] [HIT] request: {} response: {}", this->host_->address()->asString(), pending_request->request_.toString(), value->toString());
+
     if (config_.enableCommandStats()) {
       pending_request->command_request_timer_->complete();
     }
@@ -275,6 +278,7 @@ void ClientImpl::onCacheResponse(RespValuePtr&& value) {
 
     putOutlierEvent(Upstream::Outlier::Result::ExtOriginRequestSuccess);
   } else {
+    ENVOY_LOG(info, "[ClientImpl::onRespValue] [{}] [MISS] request: {}", this->host_->address()->asString(), pending_request->request_.toString());
     const bool empty_buffer = encoder_buffer_.length() == 0;
 
     if (canceled) {
@@ -323,6 +327,8 @@ void ClientImpl::onRespValue(RespValuePtr&& value) {
   ASSERT(!pending_requests_.empty());
   PendingRequestPtr request = std::move(pending_requests_.front());
   const bool canceled = request->canceled_;
+
+  ENVOY_LOG(info, "[ClientImpl::onRespValue] [{}] request: {} response: {}", this->host_->address()->asString(), request->request_.toString(), value->toString());
 
   if (config_.enableCommandStats()) {
     bool success = !canceled && (value->type() != Common::Redis::RespType::Error);
