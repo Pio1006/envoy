@@ -455,6 +455,8 @@ envoy::extensions::filters::network::redis_proxy::v3::RedisProxy::ConnPoolSettin
   setting.set_enable_redirection(redirection_support);
   setting.mutable_max_upstream_unknown_connections()->set_value(max_unknown_conns);
   setting.set_read_policy(read_policy);
+  setting.mutable_buffer_flush_timeout()->CopyFrom(Protobuf::util::TimeUtil::MillisecondsToDuration(1));
+  setting.set_max_buffer_size_before_flush(1024);
   return setting;
 }
 
