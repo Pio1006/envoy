@@ -1,4 +1,4 @@
-#include "source/extensions/filters/network/redis_proxy/adaptive_concurrency/controller/gradient_controller.h"
+#include "extensions/filters/network/redis_proxy/adaptive_concurrency/controller/gradient_controller.h"
 
 #include <atomic>
 #include <chrono>
@@ -13,7 +13,7 @@
 #include "common/protobuf/protobuf.h"
 #include "common/protobuf/utility.h"
 
-#include "source/extensions/filters/network/redis_proxy/adaptive_concurrency/controller/controller.h"
+#include "extensions/filters/network/redis_proxy/adaptive_concurrency/controller/controller.h"
 
 #include "absl/synchronization/mutex.h"
 

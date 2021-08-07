@@ -12,7 +12,7 @@
 
 #include "common/common/thread_synchronizer.h"
 
-#include "source/extensions/filters/network/redis_proxy/adaptive_concurrency/controller/controller.h"
+#include "extensions/filters/network/redis_proxy/adaptive_concurrency/controller/controller.h"
 
 #include "absl/base/thread_annotations.h"
 #include "absl/strings/numbers.h"
