@@ -1,10 +1,12 @@
 #pragma once
 
-#include "envoy/extensions/filters/http/adaptive_concurrency/v3/adaptive_concurrency.pb.h"
-#include "envoy/extensions/filters/http/adaptive_concurrency/v3/adaptive_concurrency.pb.validate.h"
+#include "envoy/extensions/filters/network/redis_proxy/v3/adaptive_concurrency.pb.h"
+#include "envoy/extensions/filters/network/redis_proxy/v3/adaptive_concurrency.pb.validate.h"
 
-#include "extensions/filters/http/common/factory_base.h"
-#include "extensions/filters/http/well_known_names.h"
+// #include "extensions/filters/http/common/factory_base.h"
+//#include "extensions/filters/http/well_known_names.h"
+#include "extensions/filters/network/common/factory_base.h"
+#include "extensions/filters/network/well_known_names.h"
 
 namespace Envoy {
 namespace Extensions {
@@ -17,12 +19,12 @@ namespace AdaptiveConcurrency {
  */
 class AdaptiveConcurrencyFilterFactory
     : public Common::FactoryBase<
-          envoy::extensions::filters::http::adaptive_concurrency::v3::AdaptiveConcurrency> {
+          envoy::extensions::filters::network::redis_proxy::adaptive_concurrency::v3::AdaptiveConcurrency> {
 public:
-  AdaptiveConcurrencyFilterFactory() : FactoryBase(HttpFilterNames::get().AdaptiveConcurrency) {}
+  AdaptiveConcurrencyFilterFactory() : FactoryBase(NetworkFilterNames::get().AdaptiveConcurrency) {}
 
-  Http::FilterFactoryCb createFilterFactoryFromProtoTyped(
-      const envoy::extensions::filters::http::adaptive_concurrency::v3::AdaptiveConcurrency&
+  Network::FilterFactoryCb createFilterFactoryFromProtoTyped(
+      const envoy::extensions::filters::network::redis_proxy::adaptive_concurrency::v3::AdaptiveConcurrency&
           proto_config,
       const std::string& stats_prefix, Server::Configuration::FactoryContext& context) override;
 };

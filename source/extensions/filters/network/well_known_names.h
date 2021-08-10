@@ -36,6 +36,8 @@ public:
   const std::string RateLimit = "envoy.filters.network.ratelimit";
   // Redis proxy filter
   const std::string RedisProxy = "envoy.filters.network.redis_proxy";
+  // Adaptive concurrency limit filter
+  const std::string AdaptiveConcurrency = "envoy.filters.network.redis_proxy.adaptive_concurrency";
   // TCP proxy filter
   const std::string TcpProxy = "envoy.filters.network.tcp_proxy";
   // Authorization filter
