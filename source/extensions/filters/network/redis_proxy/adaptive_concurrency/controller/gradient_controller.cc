@@ -5,7 +5,7 @@
 
 #include "envoy/common/random_generator.h"
 #include "envoy/event/dispatcher.h"
-#include "envoy/extensions/filters/http/adaptive_concurrency/v3/adaptive_concurrency.pb.h"
+#include "envoy/extensions/filters/network/redis_proxy/v3/adaptive_concurrency.pb.h"
 #include "envoy/runtime/runtime.h"
 #include "envoy/stats/stats.h"
 
@@ -25,7 +25,7 @@ namespace AdaptiveConcurrency {
 namespace Controller {
 
 GradientControllerConfig::GradientControllerConfig(
-    const envoy::extensions::filters::http::adaptive_concurrency::v3::GradientControllerConfig&
+    const envoy::extensions::filters::network::redis_proxy::v3::GradientControllerConfig&
         proto_config,
     Runtime::Loader& runtime)
     : runtime_(runtime),
