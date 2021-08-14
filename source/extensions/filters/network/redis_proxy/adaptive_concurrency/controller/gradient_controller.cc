@@ -25,7 +25,7 @@ namespace AdaptiveConcurrency {
 namespace Controller {
 
 GradientControllerConfig::GradientControllerConfig(
-    const envoy::extensions::filters::network::redis_proxy::v3::GradientControllerConfig&
+    const envoy::extensions::filters::network::redis_proxy::adaptive_concurrency::v3::GradientControllerConfig&
         proto_config,
     Runtime::Loader& runtime)
     : runtime_(runtime),
