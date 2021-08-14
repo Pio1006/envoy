@@ -22,7 +22,7 @@ envoy_cc_library(
         "//source/extensions/filters/network:well_known_names",
         "//source/extensions/filters/network/redis_proxy/adaptive_concurrency/controller:controller_lib",
         "//source/extensions/filters/http/common:pass_through_filter_lib",
-        "@envoy_api//envoy/extensions/filters/network/redis_proxy/adaptive_concurrency/v3:pkg_cc_proto",
+        "@envoy_api//envoy/extensions/filters/network/redis_proxy/v3:pkg_cc_proto",
     ],
 )
 
@@ -39,6 +39,6 @@ envoy_cc_extension(
         "//source/extensions/filters/network/redis_proxy/adaptive_concurrency:adaptive_concurrency_filter_lib",
         "//source/extensions/filters/network/redis_proxy/adaptive_concurrency/controller:controller_lib",
         "//source/extensions/filters/network/common:factory_base_lib",
-        "@envoy_api//envoy/extensions/filters/network/redis_proxy/adaptive_concurrency/v3:pkg_cc_proto",
+        "@envoy_api//envoy/extensions/filters/network/redis_proxy/v3:pkg_cc_proto",
     ],
 )
