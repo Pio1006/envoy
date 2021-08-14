@@ -23,13 +23,13 @@ envoy_cc_library(
         "libcircllhist",
     ],
     deps = [
-        "//include/envoy/common:time_interface",
+        "//envoy/common:time_interface",
         "//source/common/common:thread_synchronizer_lib",
         "//source/common/event:dispatcher_lib",
         "//source/common/protobuf",
         "//source/common/runtime:runtime_lib",
         "//source/common/stats:isolated_store_lib",
         "//source/common/stats:stats_lib",
-        "@envoy_api//envoy/extensions/filters/network/redis_proxy/v3:pkg_cc_proto",
+        "@envoy_api//envoy/extensions/filters/network/adaptive_concurrency/v3:pkg_cc_proto",
     ],
 )

@@ -3,8 +3,8 @@
 
 //#include "envoy/extensions/filters/http/adaptive_concurrency/v3/adaptive_concurrency.pb.h"
 //#include "envoy/extensions/filters/http/adaptive_concurrency/v3/adaptive_concurrency.pb.validate.h"
-#include "envoy/extensions/filters/network/redis_proxy/v3/adaptive_concurrency.pb.h"
-#include "envoy/extensions/filters/network/redis_proxy/v3/adaptive_concurrency.pb.validate.h"
+#include "envoy/extensions/filters/network/adaptive_concurrency/v3/adaptive_concurrency.pb.h"
+#include "envoy/extensions/filters/network/adaptive_concurrency/v3/adaptive_concurrency.pb.validate.h"
 #include "envoy/registry/registry.h"
 
 #include "source/extensions/filters/network/redis_proxy/adaptive_concurrency/adaptive_concurrency_filter.h"
@@ -17,13 +17,13 @@ namespace RedisProxy {
 namespace AdaptiveConcurrency {
 
 Network::FilterFactoryCb AdaptiveConcurrencyFilterFactory::createFilterFactoryFromProtoTyped(
-    const envoy::extensions::filters::network::redis_proxy::v3::AdaptiveConcurrency& config,
+    const envoy::extensions::filters::network::adaptive_concurrency::v3::AdaptiveConcurrency& config,
     const std::string& stats_prefix, Server::Configuration::FactoryContext& context) {
 
   auto acc_stats_prefix = stats_prefix + "adaptive_concurrency.";
 
   std::shared_ptr<Controller::ConcurrencyController> controller;
-  using Proto = envoy::extensions::filters::network::redis_proxy::v3::AdaptiveConcurrency;
+  using Proto = envoy::extensions::filters::network::adaptive_concurrency::v3::AdaptiveConcurrency;
   ASSERT(config.concurrency_controller_config_case() ==
          Proto::ConcurrencyControllerConfigCase::kGradientControllerConfig);
   auto gradient_controller_config =
