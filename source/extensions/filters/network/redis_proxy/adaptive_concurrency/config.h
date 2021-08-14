@@ -19,12 +19,12 @@ namespace AdaptiveConcurrency {
  */
 class AdaptiveConcurrencyFilterFactory
     : public Common::FactoryBase<
-          envoy::extensions::filters::network::redis_proxy::adaptive_concurrency::v3::AdaptiveConcurrency> {
+          envoy::extensions::filters::network::redis_proxy::v3::AdaptiveConcurrency> {
 public:
   AdaptiveConcurrencyFilterFactory() : FactoryBase(NetworkFilterNames::get().AdaptiveConcurrency) {}
 
   Network::FilterFactoryCb createFilterFactoryFromProtoTyped(
-      const envoy::extensions::filters::network::redis_proxy::adaptive_concurrency::v3::AdaptiveConcurrency&
+      const envoy::extensions::filters::network::redis_proxy::v3::AdaptiveConcurrency&
           proto_config,
       const std::string& stats_prefix, Server::Configuration::FactoryContext& context) override;
 };
