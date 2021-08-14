@@ -9,7 +9,8 @@
     "--security-opt=seccomp=unconfined",
     "--volume=${env:HOME}:${env:HOME}",
     "--volume=envoy-build:/build",
-    "--network=host",
+    "--network=envoy-test_envoy_test",
+    "-p=6379:6379"
     // Uncomment next line if you have devcontainer.env
     // "--env-file=.devcontainer/devcontainer.env"
   ],
