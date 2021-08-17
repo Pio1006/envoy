@@ -16,6 +16,7 @@
 #include "source/common/upstream/upstream_impl.h"
 #include "source/extensions/filters/network/common/redis/client.h"
 #include "source/extensions/filters/network/common/redis/utility.h"
+#include "source/common/common/logger.h"
 
 namespace Envoy {
 namespace Extensions {
@@ -35,7 +36,7 @@ struct RedirectionValues {
 
 using RedirectionResponse = ConstSingleton<RedirectionValues>;
 
-class ConfigImpl : public Config {
+class ConfigImpl : public Config, Logger::Loggable<Logger::Id::redis> {
 public:
   ConfigImpl(
       const envoy::extensions::filters::network::redis_proxy::v3::RedisProxy::ConnPoolSettings&
@@ -66,7 +67,7 @@ private:
   ReadPolicy read_policy_;
 };
 
-class ClientImpl : public Client, public DecoderCallbacks, public Network::ConnectionCallbacks {
+class ClientImpl : public Client, public DecoderCallbacks, public Network::ConnectionCallbacks, Logger::Loggable<Logger::Id::redis> {
 public:
   static ClientPtr create(Upstream::HostConstSharedPtr host, Event::Dispatcher& dispatcher,
                           EncoderPtr&& encoder, DecoderFactory& decoder_factory,
@@ -146,7 +147,7 @@ private:
   Stats::Scope& scope_;
 };
 
-class ClientFactoryImpl : public ClientFactory {
+class ClientFactoryImpl : public ClientFactory, Logger::Loggable<Logger::Id::redis> {
 public:
   // RedisProxy::ConnPool::ClientFactoryImpl
   ClientPtr create(Upstream::HostConstSharedPtr host, Event::Dispatcher& dispatcher,
