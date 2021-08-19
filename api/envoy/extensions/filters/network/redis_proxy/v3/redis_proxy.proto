@@ -23,7 +23,7 @@ option (udpa.annotations.file_status).package_version_status = ACTIVE;
 // Redis Proxy :ref:`configuration overview <config_network_filters_redis_proxy>`.
 // [#extension: envoy.filters.network.redis_proxy]
 
-// [#next-free-field: 9]
+// [#next-free-field: 10]
 message RedisProxy {
   option (udpa.annotations.versioning).previous_message_type =
       "envoy.config.filter.network.redis_proxy.v2.RedisProxy";
@@ -374,6 +374,8 @@ message RedisProxy {
   // See the :ref:`fault injection section
   // <config_network_filters_redis_proxy_fault_injection>` for more information on how to configure this.
   repeated RedisFault faults = 8;
+
+  AdaptiveConcurrency adaptive_concurrency = 9;
 
   // If a username is provided an ACL style AUTH command will be required with a username and password.
   // Authenticate Redis client connections locally by forcing downstream clients to issue a `Redis
