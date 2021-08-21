@@ -62,7 +62,13 @@ ClientPtr ClientImpl::create(Upstream::HostConstSharedPtr host, Event::Dispatche
                                              config, redis_command_stats, scope);
   client->connection_ = host->createConnection(dispatcher, nullptr, nullptr).connection_;
   client->connection_->addConnectionCallbacks(*client);
+  client->connection_->addReadFilter(Network::ReadFilterSharedPtr{new AdaptiveReadFilter(*client)});
   client->connection_->addReadFilter(Network::ReadFilterSharedPtr{new UpstreamReadFilter(*client)});
+  // client->connection_->addWriteFilter(Network::WriteFilterSharedPtr{new AdaptiveWriteFilter(*client)});
+
+  // client->connection_->addFilter(Network::FilterSharedPtr{new AdaptiveFilter(*client)});
+  // client->connection_->addFilter(Network::FilterSharedPtr{new AdaptiveFilter(*client)});
+  // client->connection_->addFilter(Network::FilterSharedPtr{new AdaptiveFilter(*client)});
   client->connection_->connect();
   client->connection_->noDelay(true);
   return client;

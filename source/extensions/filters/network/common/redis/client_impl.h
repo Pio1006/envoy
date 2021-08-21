@@ -98,12 +98,97 @@ private:
 
     // Network::ReadFilter
     Network::FilterStatus onData(Buffer::Instance& data, bool) override {
+      ENVOY_LOG(debug,"in UpstreamReadFilter");
       parent_.onData(data);
+      ENVOY_LOG(debug,"UpstreamReadFilter return continue");
       return Network::FilterStatus::Continue;
     }
 
     ClientImpl& parent_;
   };
+
+  struct AdaptiveFilter : public Network::Filter {
+    AdaptiveFilter(ClientImpl& root) : root_(root) {}
+
+    void initializeReadFilterCallbacks(Network::ReadFilterCallbacks&) override {}
+    void initializeWriteFilterCallbacks(Network::WriteFilterCallbacks&) override {}
+
+    Network::FilterStatus onNewConnection() override { return Network::FilterStatus::Continue; }
+
+    // Network::ReadFilter
+    Network::FilterStatus onData(Buffer::Instance& data, bool) override {
+      ENVOY_LOG(debug,"==== onData AdaptiveFilter");
+      root_.onData(data);
+      Common::Redis::RespValue error;
+      error.type(Common::Redis::RespType::Error);
+      error.asString() = "reached concurrency limits";
+      root_.encoder_->encode(error, root_.encoder_buffer_);
+      root_.connection_->write(root_.encoder_buffer_, false);
+      // callbacks_->connection().write(encoder_buffer_, false);
+      root_.connection_->close(Network::ConnectionCloseType::NoFlush);
+      ENVOY_LOG(debug,"==== onData AdaptiveFilter return stop iteration");
+      return Network::FilterStatus::StopIteration;
+    }
+
+    // Network::WriteFilter
+    Network::FilterStatus onWrite(Buffer::Instance&, bool) override {
+      ENVOY_LOG(debug,"in AdaptiveFilter");
+      
+      ENVOY_LOG(debug,"AdaptiveFilter return continue");
+      return Network::FilterStatus::Continue;
+    }
+
+    ClientImpl& root_;
+  };
+
+  struct AdaptiveReadFilter : public Network::ReadFilterBaseImpl {
+    AdaptiveReadFilter(ClientImpl& root) : root_(root) {}
+
+    // void initializeReadFilterCallbacks(Network::ReadFilterCallbacks&) override {}
+
+    // Network::FilterStatus onNewConnection() override { return Network::FilterStatus::Continue; }
+
+    // // Network::ReadFilter
+    // Network::FilterStatus onData(Buffer::Instance& data, bool) override {
+    //   ENVOY_LOG(debug,"in AdaptiveReadFilter");
+    //   root_.onData(data);
+    //   ENVOY_LOG(debug,"AdaptiveReadFilter return continue");
+    //   return Network::FilterStatus::Continue;
+    // }
+    // Network::ReadFilter
+    Network::FilterStatus onData(Buffer::Instance& data, bool) override {
+      ENVOY_LOG(debug,"==== onData AdaptiveFilter");
+      root_.onData(data);
+      Common::Redis::RespValue error;
+      error.type(Common::Redis::RespType::Error);
+      error.asString() = "reached concurrency limits";
+      root_.encoder_->encode(error, root_.encoder_buffer_);
+      root_.connection_->write(root_.encoder_buffer_, false);
+      // callbacks_->connection().write(encoder_buffer_, false);
+      root_.connection_->close(Network::ConnectionCloseType::NoFlush);
+      ENVOY_LOG(debug,"==== onData AdaptiveFilter return stop iteration");
+      return Network::FilterStatus::StopIteration;
+    }
+
+    ClientImpl& root_;
+  };
+
+struct AdaptiveWriteFilter : public Network::WriteFilter {
+    AdaptiveWriteFilter(ClientImpl& root) : root_(root) {}
+
+    void initializeWriteFilterCallbacks(Network::WriteFilterCallbacks&) override {}
+
+    // Network::WriteFilter
+    Network::FilterStatus onWrite(Buffer::Instance&, bool) override {
+      ENVOY_LOG(debug,"in AdaptiveWriteFilter");
+      
+      ENVOY_LOG(debug,"AdaptiveWriteFilter return continue");
+      return Network::FilterStatus::Continue;
+    }
+
+    ClientImpl& root_;
+  };
+
 
   struct PendingRequest : public PoolRequest {
     PendingRequest(ClientImpl& parent, ClientCallbacks& callbacks, Stats::StatName stat_name);
