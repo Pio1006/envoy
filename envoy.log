@@ -1,0 +1,925 @@
+[2021-08-18 19:15:12.160][87099][info][main] [source/server/server.cc:378] initializing epoch 0 (base id=0, hot restart version=11.104)
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:380] statically linked extensions:
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.matching.common_inputs: envoy.matching.common_inputs.environment_variable
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.grpc_credentials: envoy.grpc_credentials.aws_iam, envoy.grpc_credentials.default, envoy.grpc_credentials.file_based_metadata
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.stats_sinks: envoy.dog_statsd, envoy.graphite_statsd, envoy.metrics_service, envoy.stat_sinks.dog_statsd, envoy.stat_sinks.graphite_statsd, envoy.stat_sinks.hystrix, envoy.stat_sinks.metrics_service, envoy.stat_sinks.statsd, envoy.stat_sinks.wasm, envoy.statsd
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.http.original_ip_detection: envoy.http.original_ip_detection.custom_header, envoy.http.original_ip_detection.xff
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.resolvers: envoy.ip
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.filters.udp_listener: envoy.filters.udp.dns_filter, envoy.filters.udp_listener.udp_proxy
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.guarddog_actions: envoy.watchdog.abort_action, envoy.watchdog.profile_action
+[2021-08-18 19:15:12.161][87099][info][main] [source/server/server.cc:382]   envoy.transport_sockets.upstream: envoy.transport_sockets.alts, envoy.transport_sockets.quic, envoy.transport_sockets.raw_buffer, envoy.transport_sockets.starttls, envoy.transport_sockets.tap, envoy.transport_sockets.tls, envoy.transport_sockets.upstream_proxy_protocol, raw_buffer, starttls, tls
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.retry_host_predicates: envoy.retry_host_predicates.omit_canary_hosts, envoy.retry_host_predicates.omit_host_metadata, envoy.retry_host_predicates.previous_hosts
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.clusters: envoy.cluster.eds, envoy.cluster.logical_dns, envoy.cluster.original_dst, envoy.cluster.static, envoy.cluster.strict_dns, envoy.clusters.aggregate, envoy.clusters.dynamic_forward_proxy, envoy.clusters.redis
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.upstreams: envoy.filters.connection_pools.tcp.generic
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.filters.http: envoy.bandwidth_limit, envoy.buffer, envoy.cors, envoy.csrf, envoy.ext_authz, envoy.ext_proc, envoy.fault, envoy.filters.http.adaptive_concurrency, envoy.filters.http.admission_control, envoy.filters.http.alternate_protocols_cache, envoy.filters.http.aws_lambda, envoy.filters.http.aws_request_signing, envoy.filters.http.bandwidth_limit, envoy.filters.http.buffer, envoy.filters.http.cache, envoy.filters.http.cdn_loop, envoy.filters.http.composite, envoy.filters.http.compressor, envoy.filters.http.cors, envoy.filters.http.csrf, envoy.filters.http.decompressor, envoy.filters.http.dynamic_forward_proxy, envoy.filters.http.dynamo, envoy.filters.http.ext_authz, envoy.filters.http.ext_proc, envoy.filters.http.fault, envoy.filters.http.grpc_http1_bridge, envoy.filters.http.grpc_http1_reverse_bridge, envoy.filters.http.grpc_json_transcoder, envoy.filters.http.grpc_stats, envoy.filters.http.grpc_web, envoy.filters.http.header_to_metadata, envoy.filters.http.health_check, envoy.filters.http.ip_tagging, envoy.filters.http.jwt_authn, envoy.filters.http.local_ratelimit, envoy.filters.http.lua, envoy.filters.http.oauth2, envoy.filters.http.on_demand, envoy.filters.http.original_src, envoy.filters.http.ratelimit, envoy.filters.http.rbac, envoy.filters.http.router, envoy.filters.http.set_metadata, envoy.filters.http.squash, envoy.filters.http.tap, envoy.filters.http.wasm, envoy.grpc_http1_bridge, envoy.grpc_json_transcoder, envoy.grpc_web, envoy.health_check, envoy.http_dynamo_filter, envoy.ip_tagging, envoy.local_rate_limit, envoy.lua, envoy.rate_limit, envoy.router, envoy.squash, match-wrapper
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.http.cache: envoy.extensions.http.cache.simple
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.compression.decompressor: envoy.compression.brotli.decompressor, envoy.compression.gzip.decompressor
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.quic.server.crypto_stream: envoy.quic.crypto_stream.server.quiche
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.matching.http.input: request-headers, request-trailers, response-headers, response-trailers
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.filters.listener: envoy.filters.listener.http_inspector, envoy.filters.listener.original_dst, envoy.filters.listener.original_src, envoy.filters.listener.proxy_protocol, envoy.filters.listener.tls_inspector, envoy.listener.http_inspector, envoy.listener.original_dst, envoy.listener.original_src, envoy.listener.proxy_protocol, envoy.listener.tls_inspector
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.matching.input_matchers: envoy.matching.matchers.consistent_hashing, envoy.matching.matchers.ip
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.internal_redirect_predicates: envoy.internal_redirect_predicates.allow_listed_routes, envoy.internal_redirect_predicates.previous_routes, envoy.internal_redirect_predicates.safe_cross_scheme
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.dubbo_proxy.protocols: dubbo
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.matching.action: composite-action, skip
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.tracers: envoy.dynamic.ot, envoy.lightstep, envoy.tracers.datadog, envoy.tracers.dynamic_ot, envoy.tracers.lightstep, envoy.tracers.opencensus, envoy.tracers.skywalking, envoy.tracers.xray, envoy.tracers.zipkin, envoy.zipkin
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.formatter: envoy.formatter.metadata, envoy.formatter.req_without_query
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.dubbo_proxy.route_matchers: default
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.wasm.runtime: envoy.wasm.runtime.null, envoy.wasm.runtime.v8
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.thrift_proxy.protocols: auto, binary, binary/non-strict, compact, twitter
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.filters.network: envoy.client_ssl_auth, envoy.echo, envoy.ext_authz, envoy.filters.network.client_ssl_auth, envoy.filters.network.connection_limit, envoy.filters.network.direct_response, envoy.filters.network.dubbo_proxy, envoy.filters.network.echo, envoy.filters.network.ext_authz, envoy.filters.network.http_connection_manager, envoy.filters.network.kafka_broker, envoy.filters.network.local_ratelimit, envoy.filters.network.mongo_proxy, envoy.filters.network.mysql_proxy, envoy.filters.network.postgres_proxy, envoy.filters.network.ratelimit, envoy.filters.network.rbac, envoy.filters.network.redis_proxy, envoy.filters.network.rocketmq_proxy, envoy.filters.network.sni_cluster, envoy.filters.network.sni_dynamic_forward_proxy, envoy.filters.network.tcp_proxy, envoy.filters.network.thrift_proxy, envoy.filters.network.wasm, envoy.filters.network.zookeeper_proxy, envoy.http_connection_manager, envoy.mongo_proxy, envoy.ratelimit, envoy.redis_proxy, envoy.tcp_proxy
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.dubbo_proxy.filters: envoy.filters.dubbo.router
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.access_loggers: envoy.access_loggers.file, envoy.access_loggers.http_grpc, envoy.access_loggers.open_telemetry, envoy.access_loggers.stderr, envoy.access_loggers.stdout, envoy.access_loggers.tcp_grpc, envoy.access_loggers.wasm, envoy.file_access_log, envoy.http_grpc_access_log, envoy.open_telemetry_access_log, envoy.stderr_access_log, envoy.stdout_access_log, envoy.tcp_grpc_access_log, envoy.wasm_access_log
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.compression.compressor: envoy.compression.brotli.compressor, envoy.compression.gzip.compressor
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.transport_sockets.downstream: envoy.transport_sockets.alts, envoy.transport_sockets.quic, envoy.transport_sockets.raw_buffer, envoy.transport_sockets.starttls, envoy.transport_sockets.tap, envoy.transport_sockets.tls, raw_buffer, starttls, tls
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.tls.cert_validator: envoy.tls.cert_validator.default, envoy.tls.cert_validator.spiffe
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.health_checkers: envoy.health_checkers.redis
+[2021-08-18 19:15:12.162][87099][info][main] [source/server/server.cc:382]   envoy.bootstrap: envoy.bootstrap.wasm, envoy.extensions.network.socket_interface.default_socket_interface
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.thrift_proxy.filters: envoy.filters.thrift.rate_limit, envoy.filters.thrift.router
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.http.stateful_header_formatters: preserve_case
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.thrift_proxy.transports: auto, framed, header, unframed
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.upstream_options: envoy.extensions.upstreams.http.v3.HttpProtocolOptions, envoy.upstreams.http.http_protocol_options
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.retry_priorities: envoy.retry_priorities.previous_priorities
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.quic.proof_source: envoy.quic.proof_source.filter_chain
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.request_id: envoy.request_id.uuid
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.rate_limit_descriptors: envoy.rate_limit_descriptors.expr
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.dubbo_proxy.serializers: dubbo.hessian2
+[2021-08-18 19:15:12.163][87099][info][main] [source/server/server.cc:382]   envoy.resource_monitors: envoy.resource_monitors.fixed_heap, envoy.resource_monitors.injected_resource
+[2021-08-18 19:15:12.226][87099][warning][misc] [source/common/protobuf/message_validator_impl.cc:21] Deprecated field: type envoy.config.bootstrap.v3.Admin Using deprecated option 'envoy.config.bootstrap.v3.Admin.access_log_path' from file bootstrap.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2021-08-18 19:15:12.226][87099][info][main] [source/server/server.cc:400] HTTP header map info:
+[2021-08-18 19:15:12.232][87099][debug][runtime] [source/common/runtime/runtime_features.cc:31] Unable to use runtime singleton for feature envoy.http.headermap.lazy_map_min_size
+[2021-08-18 19:15:12.232][87099][debug][runtime] [source/common/runtime/runtime_features.cc:20] Unable to use runtime singleton for feature envoy.reloadable_features.header_map_correctly_coalesce_cookies
+[2021-08-18 19:15:12.232][87099][debug][runtime] [source/common/runtime/runtime_features.cc:31] Unable to use runtime singleton for feature envoy.http.headermap.lazy_map_min_size
+[2021-08-18 19:15:12.232][87099][debug][runtime] [source/common/runtime/runtime_features.cc:20] Unable to use runtime singleton for feature envoy.reloadable_features.header_map_correctly_coalesce_cookies
+[2021-08-18 19:15:12.235][87099][debug][runtime] [source/common/runtime/runtime_features.cc:31] Unable to use runtime singleton for feature envoy.http.headermap.lazy_map_min_size
+[2021-08-18 19:15:12.235][87099][debug][runtime] [source/common/runtime/runtime_features.cc:20] Unable to use runtime singleton for feature envoy.reloadable_features.header_map_correctly_coalesce_cookies
+[2021-08-18 19:15:12.235][87099][debug][runtime] [source/common/runtime/runtime_features.cc:31] Unable to use runtime singleton for feature envoy.http.headermap.lazy_map_min_size
+[2021-08-18 19:15:12.235][87099][debug][runtime] [source/common/runtime/runtime_features.cc:20] Unable to use runtime singleton for feature envoy.reloadable_features.header_map_correctly_coalesce_cookies
+[2021-08-18 19:15:12.236][87099][info][main] [source/server/server.cc:403]   request header map: 632 bytes: :authority,:method,:path,:protocol,:scheme,accept,accept-encoding,access-control-request-method,authentication,authorization,cache-control,cdn-loop,connection,content-encoding,content-length,content-type,expect,grpc-accept-encoding,grpc-timeout,if-match,if-modified-since,if-none-match,if-range,if-unmodified-since,keep-alive,origin,pragma,proxy-connection,referer,te,transfer-encoding,upgrade,user-agent,via,x-client-trace-id,x-envoy-attempt-count,x-envoy-decorator-operation,x-envoy-downstream-service-cluster,x-envoy-downstream-service-node,x-envoy-expected-rq-timeout-ms,x-envoy-external-address,x-envoy-force-trace,x-envoy-hedge-on-per-try-timeout,x-envoy-internal,x-envoy-ip-tags,x-envoy-max-retries,x-envoy-original-path,x-envoy-original-url,x-envoy-retriable-header-names,x-envoy-retriable-status-codes,x-envoy-retry-grpc-on,x-envoy-retry-on,x-envoy-upstream-alt-stat-name,x-envoy-upstream-rq-per-try-timeout-ms,x-envoy-upstream-rq-timeout-alt-response,x-envoy-upstream-rq-timeout-ms,x-forwarded-client-cert,x-forwarded-for,x-forwarded-proto,x-ot-span-context,x-request-id
+[2021-08-18 19:15:12.236][87099][info][main] [source/server/server.cc:403]   request trailer map: 136 bytes: 
+[2021-08-18 19:15:12.236][87099][info][main] [source/server/server.cc:403]   response header map: 432 bytes: :status,access-control-allow-credentials,access-control-allow-headers,access-control-allow-methods,access-control-allow-origin,access-control-expose-headers,access-control-max-age,age,cache-control,connection,content-encoding,content-length,content-type,date,etag,expires,grpc-message,grpc-status,keep-alive,last-modified,location,proxy-connection,server,transfer-encoding,upgrade,vary,via,x-envoy-attempt-count,x-envoy-decorator-operation,x-envoy-degraded,x-envoy-immediate-health-check-fail,x-envoy-ratelimited,x-envoy-upstream-canary,x-envoy-upstream-healthchecked-cluster,x-envoy-upstream-service-time,x-request-id
+[2021-08-18 19:15:12.236][87099][info][main] [source/server/server.cc:403]   response trailer map: 160 bytes: grpc-message,grpc-status
+[2021-08-18 19:15:12.256][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.shrink_heap.
+[2021-08-18 19:15:12.257][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.257][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.257][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reduce_timeouts.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.stop_accepting_connections.
+[2021-08-18 19:15:12.258][87099][debug][main] [source/server/overload_manager_impl.cc:367] No overload action is configured for envoy.overload_actions.reject_incoming_connections.
+[2021-08-18 19:15:12.258][87099][info][main] [source/server/server.cc:760] runtime: {}
+[2021-08-18 19:15:12.264][87099][info][admin] [source/server/admin/admin.cc:134] admin address: 0.0.0.0:9901
+[2021-08-18 19:15:12.266][87099][info][config] [source/server/configuration_impl.cc:127] loading tracing configuration
+[2021-08-18 19:15:12.266][87099][info][config] [source/server/configuration_impl.cc:87] loading 0 static secret(s)
+[2021-08-18 19:15:12.266][87099][info][config] [source/server/configuration_impl.cc:93] loading 1 cluster(s)
+[2021-08-18 19:15:12.269][87113][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:12.289][87099][trace][upstream] [source/extensions/clusters/redis/redis_cluster.cc:161] starting async DNS resolution for redis-cluster
+[2021-08-18 19:15:12.290][87099][trace][upstream] [source/common/network/dns_impl.cc:219] Setting DNS resolution timer for 5000 milliseconds
+[2021-08-18 19:15:12.290][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:101] cm init: adding: cluster=cluster_redis primary=1 secondary=0
+[2021-08-18 19:15:12.290][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:155] maybe finish initialize state: 1
+[2021-08-18 19:15:12.290][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:164] maybe finish initialize primary init clusters empty: false
+[2021-08-18 19:15:12.290][87099][info][config] [source/server/configuration_impl.cc:97] loading 1 listener(s)
+[2021-08-18 19:15:12.290][87099][debug][config] [source/server/configuration_impl.cc:99] listener #0:
+[2021-08-18 19:15:12.291][87099][debug][config] [source/server/listener_manager_impl.cc:392] begin add/update listener: name=listener_redis hash=11258985746264750157
+[2021-08-18 19:15:12.291][87099][debug][config] [source/server/listener_manager_impl.cc:429] use full listener update path for listener name=listener_redis hash=11258985746264750157
+[2021-08-18 19:15:12.291][87099][debug][config] [source/server/listener_manager_impl.cc:86]   filter #0:
+[2021-08-18 19:15:12.291][87099][debug][config] [source/server/listener_manager_impl.cc:87]     name: redis
+[2021-08-18 19:15:12.292][87099][debug][config] [source/server/listener_manager_impl.cc:90]   config: {"@type":"type.googleapis.com/envoy.extensions.filters.network.redis_proxy.v3.RedisProxy","faults":[{"fault_type":"DELAY","delay":"2s","fault_enabled":{"runtime_key":"bogus_key","default_value":{"numerator":20,"denominator":"HUNDRED"}}},{"fault_enabled":{"default_value":{"denominator":"HUNDRED","numerator":40},"runtime_key":"key"},"delay":"6s","fault_type":"DELAY"}],"adaptive_concurrency":{"gradient_controller_config":{"concurrency_limit_params":{"concurrency_update_interval":"0.100s"},"min_rtt_calc_params":{"interval":"60s","jitter":{"value":10},"request_count":50},"sample_aggregate_percentile":{"value":90}},"enabled":{"default_value":true,"runtime_key":"adaptive_concurrency.enabled"}},"stat_prefix":"redis_stats","prefix_routes":{"catch_all_route":{"cluster":"cluster_redis"}},"settings":{"op_timeout":"60s","enable_redirection":true}}
+[2021-08-18 19:15:12.384][87099][debug][config] [source/server/filter_chain_manager_impl.cc:237] new fc_contexts has 1 filter chains, including 1 newly built
+[2021-08-18 19:15:12.385][87099][debug][init] [source/common/init/manager_impl.cc:24] added target Listener-init-target listener_redis to init manager Server
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:92] Set listener listener_redis socket factory local address to 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:138] Create listen socket for listener listener_redis on address 0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:148] listener_redis: Setting socket options succeeded
+[2021-08-18 19:15:12.385][87099][debug][config] [source/server/listener_impl.cc:717] add active listener: name=listener_redis, hash=11258985746264750157, address=0.0.0.0:6379
+[2021-08-18 19:15:12.385][87099][info][config] [source/server/configuration_impl.cc:109] loading stats configuration
+[2021-08-18 19:15:12.387][87099][info][main] [source/server/server.cc:857] starting main dispatch loop
+[2021-08-18 19:15:12.388][87099][trace][upstream] [source/common/network/dns_impl.cc:219] Setting DNS resolution timer for 5000 milliseconds
+[2021-08-18 19:15:12.389][87099][trace][upstream] [source/extensions/clusters/redis/redis_cluster.cc:168] async DNS resolution complete for redis-cluster
+[2021-08-18 19:15:12.389][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7000
+[2021-08-18 19:15:12.389][87099][debug][connection] [source/common/network/connection_impl.cc:872] [C0] connecting to 172.21.0.2:7000
+[2021-08-18 19:15:12.390][87099][debug][connection] [source/common/network/connection_impl.cc:890] [C0] connection in progress
+[2021-08-18 19:15:18.586][87099][trace][connection] [source/common/network/connection_impl.cc:477] [C0] writing 28 bytes, end_stream false
+[2021-08-18 19:15:18.586][87099][trace][connection] [source/common/network/connection_impl.cc:554] [C0] socket event: 2
+[2021-08-18 19:15:18.586][87099][trace][connection] [source/common/network/connection_impl.cc:663] [C0] write ready
+[2021-08-18 19:15:18.586][87099][debug][connection] [source/common/network/connection_impl.cc:672] [C0] connected
+[2021-08-18 19:15:18.586][87099][trace][connection] [source/common/network/connection_impl.cc:417] [C0] raising connection event 2
+[2021-08-18 19:15:18.586][87099][trace][connection] [source/common/network/connection_impl.cc:663] [C0] write ready
+[2021-08-18 19:15:18.587][87099][trace][connection] [source/common/network/raw_buffer_socket.cc:67] [C0] write returns: 28
+[2021-08-18 19:15:18.587][87099][debug][main] [source/server/server.cc:217] flushing stats
+[2021-08-18 19:15:18.587][87099][debug][main] [source/server/server.cc:227] Envoy is not fully initialized, skipping histogram merge and flushing stats
+[2021-08-18 19:15:18.592][87099][trace][connection] [source/common/network/connection_impl.cc:554] [C0] socket event: 3
+[2021-08-18 19:15:18.592][87099][trace][connection] [source/common/network/connection_impl.cc:663] [C0] write ready
+[2021-08-18 19:15:18.592][87099][trace][connection] [source/common/network/connection_impl.cc:592] [C0] read ready. dispatch_buffered_data=false
+[2021-08-18 19:15:18.592][87099][trace][connection] [source/common/network/raw_buffer_socket.cc:24] [C0] read returns: 508
+[2021-08-18 19:15:18.592][87099][trace][connection] [source/common/network/raw_buffer_socket.cc:38] [C0] read error: Resource temporarily unavailable
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 508 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:348] parse slice: ValueRootStart
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 508 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 507 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 507 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 506 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 505 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 504 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 503 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 503 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 502 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 501 remaining
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 4
+[2021-08-18 19:15:19.338][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 500 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 499 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 0
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 499 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 498 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 497 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 0
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 496 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 496 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 495 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 5
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 495 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 5
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 494 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 493 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 6
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 492 remaining
+[2021-08-18 19:15:19.339][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 491 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 490 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 5460
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 489 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 489 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 488 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 488 remaining
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.340][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 487 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 486 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 485 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 484 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 484 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 483 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 482 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 481 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 480 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 470 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 469 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 468 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 468 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 467 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 467 remaining
+[2021-08-18 19:15:19.341][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 466 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 465 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 464 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 463 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 462 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7000
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 461 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 461 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 460 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 460 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 459 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 458 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 457 remaining
+[2021-08-18 19:15:19.342][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 456 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 762021200c7ce81fe2efb1a048528c03b6e4f3dc
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 416 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 415 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 414 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 414 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 414 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 413 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 413 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 412 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 411 remaining
+[2021-08-18 19:15:19.343][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 410 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 409 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 409 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 408 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 407 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 406 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 405 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 395 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 394 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 393 remaining
+[2021-08-18 19:15:19.344][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 393 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 392 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 392 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 391 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 390 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 389 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 5
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 388 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 387 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7005
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 386 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 386 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 385 remaining
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.345][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 385 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 384 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 383 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 382 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 381 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: ce2c5f9bcbb060646d664aa97bfee9f0766f3054
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 341 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 340 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 339 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 339 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 339 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 339 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 338 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 338 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 337 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 336 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 4
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 335 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 334 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 334 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 333 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 332 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 9
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 331 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 2
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 330 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 329 remaining
+[2021-08-18 19:15:19.346][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 328 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10923
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 327 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 327 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 326 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 326 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 325 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 6
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 324 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 323 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 8
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 322 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 321 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 320 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 16383
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 319 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 319 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 318 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 318 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 317 remaining
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.347][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 316 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 315 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 314 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 314 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 313 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 312 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 311 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 310 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 300 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 299 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 298 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 298 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 297 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 297 remaining
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.348][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 296 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 295 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 294 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 2
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 293 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 292 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7002
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 291 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 291 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 290 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 290 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 289 remaining
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.349][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 288 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 287 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 286 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 3bb0e26ed6e0165aa534a59e6ec74a5f115f6470
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 246 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 245 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 244 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 244 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 244 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 243 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 243 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 242 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 241 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 240 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 239 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 239 remaining
+[2021-08-18 19:15:19.350][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 238 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 237 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 236 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 235 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 225 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 224 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 223 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 223 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 222 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 222 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 221 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 220 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 219 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 218 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 217 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7004
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 216 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 216 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 215 remaining
+[2021-08-18 19:15:19.351][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 215 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 214 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 213 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 212 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 211 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: e643c79598da1fa25f599c64c6ebf013c10ef583
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 171 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 170 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 169 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 169 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 169 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 169 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 168 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 168 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 167 remaining
+[2021-08-18 19:15:19.352][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 166 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 4
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 165 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 164 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 5
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 164 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 5
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 163 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 162 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 6
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 161 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 160 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 159 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 5461
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 158 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 158 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 157 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 157 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 156 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 155 remaining
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 9
+[2021-08-18 19:15:19.353][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 154 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 2
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 153 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 2
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 152 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 151 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10922
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 150 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 150 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 149 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 149 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 148 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 147 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 146 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 145 remaining
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.354][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 145 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 144 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 143 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 142 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 141 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 131 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 130 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 129 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 129 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 128 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 128 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 127 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 126 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 125 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 124 remaining
+[2021-08-18 19:15:19.355][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 123 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7001
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 122 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 122 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 121 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 121 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 120 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 119 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 118 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 117 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: ebcaa6d3ace3530bc056fd6b18b685d9b4af30e8
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 77 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 76 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 75 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 75 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 75 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 74 remaining
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:19.356][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 74 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 73 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 72 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 71 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 70 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 70 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 69 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 68 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 67 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 10
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 66 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 172.21.0.2
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 56 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 55 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 54 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 54 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: :
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 53 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 7
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 53 remaining
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 7
+[2021-08-18 19:15:19.357][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 52 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 51 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 50 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 49 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 48 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 7003
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 47 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 47 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 46 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 46 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 45 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 0
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 44 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 43 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 40
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 42 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: 03d443361027028db8e672f1f23ae80fdf199c37
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 2 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 1 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:19.358][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.359][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:19.359][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.359][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:19.359][87099][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7000
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7005
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7002
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7004
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7001
+[2021-08-18 19:15:19.359][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:258] transport socket match, socket default selected for host with address 172.21.0.2:7003
+[2021-08-18 19:15:19.361][87099][trace][upstream] [source/common/upstream/upstream_impl.cc:1370] Local locality: 
+[2021-08-18 19:15:19.361][87099][debug][upstream] [source/common/upstream/upstream_impl.cc:1063] initializing Primary cluster cluster_redis completed
+[2021-08-18 19:15:19.361][87099][debug][init] [source/common/init/manager_impl.cc:49] init manager Cluster cluster_redis contains no targets
+[2021-08-18 19:15:19.361][87099][debug][init] [source/common/init/watcher_impl.cc:14] init manager Cluster cluster_redis initialized, notifying ClusterImplBase
+[2021-08-18 19:15:19.361][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:135] cm init: init complete: cluster=cluster_redis primary=0 secondary=0
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:155] maybe finish initialize state: 1
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:164] maybe finish initialize primary init clusters empty: true
+[2021-08-18 19:15:19.364][87099][debug][init] [source/common/init/manager_impl.cc:49] init manager RTDS contains no targets
+[2021-08-18 19:15:19.364][87099][debug][init] [source/common/init/watcher_impl.cc:14] init manager RTDS initialized, notifying RTDS
+[2021-08-18 19:15:19.364][87099][info][runtime] [source/common/runtime/runtime_impl.cc:449] RTDS has finished initialization
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:224] continue initializing secondary clusters
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:155] maybe finish initialize state: 2
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:164] maybe finish initialize primary init clusters empty: true
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:179] maybe finish initialize secondary init clusters empty: true
+[2021-08-18 19:15:19.364][87099][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:200] maybe finish initialize cds api ready: false
+[2021-08-18 19:15:19.364][87099][info][upstream] [source/common/upstream/cluster_manager_impl.cc:206] cm init: all clusters initialized
+[2021-08-18 19:15:19.364][87099][info][main] [source/server/server.cc:838] all clusters initialized. initializing init manager
+[2021-08-18 19:15:19.364][87099][debug][init] [source/common/init/manager_impl.cc:53] init manager Server initializing
+[2021-08-18 19:15:19.364][87099][debug][init] [source/common/init/target_impl.cc:15] init manager Server initializing target Listener-init-target listener_redis
+[2021-08-18 19:15:19.365][87099][debug][init] [source/common/init/manager_impl.cc:49] init manager Listener-local-init-manager listener_redis 11258985746264750157 contains no targets
+[2021-08-18 19:15:19.365][87099][debug][init] [source/common/init/watcher_impl.cc:14] init manager Listener-local-init-manager listener_redis 11258985746264750157 initialized, notifying Listener-local-init-watcher listener_redis
+[2021-08-18 19:15:19.365][87099][debug][init] [source/common/init/watcher_impl.cc:14] target Listener-init-target listener_redis initialized, notifying init manager Server
+[2021-08-18 19:15:19.365][87099][debug][init] [source/common/init/watcher_impl.cc:14] init manager Server initialized, notifying RunHelper
+[2021-08-18 19:15:19.365][87099][info][config] [source/server/listener_manager_impl.cc:780] all dependencies initialized. starting workers
+[2021-08-18 19:15:19.365][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 0
+[2021-08-18 19:15:19.366][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 1
+[2021-08-18 19:15:19.366][87161][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.367][87162][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.367][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 2
+[2021-08-18 19:15:19.367][87163][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.367][87161][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.368][87164][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.368][87162][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.368][87161][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.368][87161][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.368][87162][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.368][87162][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.368][87165][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.368][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 3
+[2021-08-18 19:15:19.370][87166][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.370][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 4
+[2021-08-18 19:15:19.370][87167][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.370][87165][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.371][87168][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.371][87169][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.371][87099][debug][config] [source/server/listener_manager_impl.cc:817] starting worker 5
+[2021-08-18 19:15:19.371][87166][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.372][87170][debug][main] [source/server/worker_impl.cc:118] worker entering dispatch loop
+[2021-08-18 19:15:19.372][87171][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.372][87168][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.373][87168][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.373][87172][debug][grpc] [source/common/grpc/google_async_client_impl.cc:50] completionThread running
+[2021-08-18 19:15:19.373][87168][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.373][87170][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:989] adding TLS cluster cluster_redis
+[2021-08-18 19:15:19.374][87170][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.374][87170][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.376][87166][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.376][87166][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.377][87165][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1051] membership update for TLS cluster cluster_redis added 6 removed 0
+[2021-08-18 19:15:19.377][87165][debug][upstream] [source/common/upstream/cluster_manager_impl.cc:1056] re-creating local LB for TLS cluster cluster_redis
+[2021-08-18 19:15:19.383][87099][warning][main] [source/server/server.cc:735] there is no configured limit to the number of allowed active connections. Set a limit via the runtime key overload.global_downstream_max_connections
+[2021-08-18 19:15:23.587][87099][debug][main] [source/server/server.cc:217] flushing stats
+[2021-08-18 19:15:26.300][87170][debug][conn_handler] [source/server/active_tcp_listener.cc:139] [C1] new connection from 172.21.0.1:63128
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/connection_impl.cc:554] [C1] socket event: 2
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C1] write ready
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/connection_impl.cc:554] [C1] socket event: 3
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C1] write ready
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/connection_impl.cc:592] [C1] read ready. dispatch_buffered_data=false
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:24] [C1] read returns: 28
+[2021-08-18 19:15:26.301][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:38] [C1] read error: Resource temporarily unavailable
+[2021-08-18 19:15:26.301][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 28 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:348] parse slice: ValueRootStart
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 28 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: *
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 27 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 3
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 27 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 3
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 26 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 25 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 3
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 24 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 23 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 23 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 22 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 21 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 4
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 20 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: mget
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 16 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 15 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 14 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 14 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 13 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 13 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 12 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 11 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 1
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 10 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: x
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 9 remaining
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:26.302][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 8 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 7 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 7 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 6 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 1
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 6 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 5 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 4 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 1
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 3 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: y
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 2 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 1 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:26.303][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:26.303][87170][debug][redis] [source/extensions/filters/network/redis_proxy/command_splitter_impl.cc:542] splitting '["mget", "x", "y"]'
+[2021-08-18 19:15:26.304][87170][debug][connection] [source/common/network/connection_impl.cc:872] [C2] connecting to 172.21.0.2:7002
+[2021-08-18 19:15:26.304][87170][debug][connection] [source/common/network/connection_impl.cc:890] [C2] connection in progress
+[2021-08-18 19:15:34.765][87099][debug][main] [source/server/server.cc:217] flushing stats
+[2021-08-18 19:15:44.060][87099][trace][connection] [source/common/network/connection_impl.cc:477] [C0] writing 28 bytes, end_stream false
+[2021-08-18 19:15:44.061][87099][trace][connection] [source/common/network/connection_impl.cc:554] [C0] socket event: 2
+[2021-08-18 19:15:44.061][87099][trace][connection] [source/common/network/connection_impl.cc:663] [C0] write ready
+[2021-08-18 19:15:44.523][87099][trace][connection] [source/common/network/raw_buffer_socket.cc:67] [C0] write returns: 28
+[2021-08-18 19:15:44.523][87099][debug][connection] [source/common/network/connection_impl.cc:138] [C0] closing data_to_write=0 type=1
+[2021-08-18 19:15:44.523][87099][debug][connection] [source/common/network/connection_impl.cc:249] [C0] closing socket: 1
+[2021-08-18 19:15:44.523][87099][trace][connection] [source/common/network/connection_impl.cc:417] [C0] raising connection event 1
+[2021-08-18 19:15:44.523][87099][trace][main] [source/common/event/dispatcher_impl.cc:253] item added to deferred deletion list (size=1)
+[2021-08-18 19:15:44.524][87099][trace][main] [source/common/event/dispatcher_impl.cc:115] clearing deferred deletion list (size=1)
+[2021-08-18 19:15:44.524][87170][trace][connection] [source/common/network/connection_impl.cc:477] [C2] writing 20 bytes, end_stream false
+[2021-08-18 19:15:49.527][87170][trace][connection] [source/common/network/connection_impl.cc:477] [C2] writing 20 bytes, end_stream false
+[2021-08-18 19:15:49.527][87170][trace][connection] [source/common/network/connection_impl.cc:554] [C2] socket event: 2
+[2021-08-18 19:15:49.527][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C2] write ready
+[2021-08-18 19:15:49.527][87170][debug][connection] [source/common/network/connection_impl.cc:672] [C2] connected
+[2021-08-18 19:15:49.527][87170][trace][connection] [source/common/network/connection_impl.cc:417] [C2] raising connection event 2
+[2021-08-18 19:15:49.527][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C2] write ready
+[2021-08-18 19:15:49.528][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:67] [C2] write returns: 40
+[2021-08-18 19:15:49.528][87170][trace][connection] [source/common/network/connection_impl.cc:554] [C2] socket event: 3
+[2021-08-18 19:15:49.528][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C2] write ready
+[2021-08-18 19:15:49.529][87170][trace][connection] [source/common/network/connection_impl.cc:592] [C2] read ready. dispatch_buffered_data=false
+[2021-08-18 19:15:49.529][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:24] [C2] read returns: 15
+[2021-08-18 19:15:49.529][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:38] [C2] read error: Resource temporarily unavailable
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 15 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:348] parse slice: ValueRootStart
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 15 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 14 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: 4
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 14 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 4
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 13 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 12 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 4
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 11 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:484] parse slice: BulkStringBody complete: test
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 7 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:492] parse slice: CR
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 6 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:504] parse slice: LF
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 5 remaining
+[2021-08-18 19:15:50.347][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 5 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:348] parse slice: ValueRootStart
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 5 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:356] parse slice: ValueStart: $
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 4 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:395] parse slice: IntegerStart: -
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 3 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 1
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 2 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:407] parse slice: Integer: 
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 1 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:429] parse slice: IntegerLF: 1
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:345] parse slice: 0 remaining
+[2021-08-18 19:15:50.348][87170][trace][redis] [source/extensions/filters/network/common/redis/codec_impl.cc:529] parse slice: ValueComplete
+[2021-08-18 19:15:50.348][87170][debug][redis] [source/extensions/filters/network/redis_proxy/command_splitter_impl.cc:287] response: '["test", null]'
+[2021-08-18 19:15:51.917][87170][trace][connection] [source/common/network/connection_impl.cc:477] [C1] writing 19 bytes, end_stream false
+[2021-08-18 19:15:51.917][87170][trace][connection] [source/common/network/connection_impl.cc:554] [C1] socket event: 2
+[2021-08-18 19:15:51.917][87170][trace][connection] [source/common/network/connection_impl.cc:663] [C1] write ready
+[2021-08-18 19:15:51.918][87170][trace][connection] [source/common/network/raw_buffer_socket.cc:67] [C1] write returns: 19
+[2021-08-18 19:15:54.528][87099][debug][main] [source/server/server.cc:217] flushing stats
