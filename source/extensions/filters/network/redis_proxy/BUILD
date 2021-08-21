@@ -116,6 +116,25 @@ envoy_cc_library(
     ],
 )
 
+
+envoy_cc_library(
+    name = "pass_through_filter_lib",
+    srcs = ["pass_through_filter.cc"],
+    hdrs = ["pass_through_filter.h"],
+    deps = [
+        ":command_splitter_interface",
+        "//envoy/network:drain_decision_interface",
+        "//envoy/network:filter_interface",
+        "//envoy/upstream:cluster_manager_interface",
+        "//source/common/buffer:buffer_lib",
+        "//source/common/common:assert_lib",
+        "//source/common/config:datasource_lib",
+        "//source/common/config:utility_lib",
+        "//source/extensions/filters/network/common/redis:codec_interface",
+        "@envoy_api//envoy/extensions/filters/network/redis_proxy/v3:pkg_cc_proto",
+    ],
+)
+
 envoy_cc_extension(
     name = "config",
     srcs = ["config.cc"],
@@ -135,6 +154,7 @@ envoy_cc_extension(
         "//source/extensions/filters/network/redis_proxy:command_splitter_lib",
         "//source/extensions/filters/network/redis_proxy:conn_pool_lib",
         "//source/extensions/filters/network/redis_proxy:proxy_filter_lib",
+        "//source/extensions/filters/network/redis_proxy:pass_through_filter_lib",
         "//source/extensions/filters/network/redis_proxy:router_lib",
         "@envoy_api//envoy/config/core/v3:pkg_cc_proto",
         "@envoy_api//envoy/extensions/filters/network/redis_proxy/v3:pkg_cc_proto",

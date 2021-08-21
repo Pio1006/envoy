@@ -8,6 +8,7 @@
 #include "source/extensions/filters/network/common/redis/fault_impl.h"
 #include "source/extensions/filters/network/redis_proxy/command_splitter_impl.h"
 #include "source/extensions/filters/network/redis_proxy/proxy_filter.h"
+#include "source/extensions/filters/network/redis_proxy/pass_through_filter.h"
 #include "source/extensions/filters/network/redis_proxy/router_impl.h"
 
 #include "absl/container/flat_hash_set.h"
@@ -43,6 +44,15 @@ Network::FilterFactoryCb RedisProxyFilterConfigFactory::createFilterFactoryFromP
 
   ProxyFilterConfigSharedPtr filter_config(std::make_shared<ProxyFilterConfig>(
       proto_config, context.scope(), context.drainDecision(), context.runtime(), context.api()));
+
+
+  PassThroughConfigSharedPtr pass_through_filter_config(std::make_shared<PassThroughConfig>(
+      proto_config.adaptive_concurrency(),
+      context.scope(),
+      context.drainDecision(),
+      context.runtime(),
+      context.timeSource(),
+      context.api()));
 
   envoy::extensions::filters::network::redis_proxy::v3::RedisProxy::PrefixRoutes prefix_routes(
       proto_config.prefix_routes());
@@ -94,11 +104,14 @@ Network::FilterFactoryCb RedisProxyFilterConfigFactory::createFilterFactoryFromP
       std::make_shared<CommandSplitter::InstanceImpl>(
           std::move(router), context.scope(), filter_config->stat_prefix_, context.timeSource(),
           proto_config.latency_in_micros(), std::move(fault_manager));
-  return [splitter, filter_config](Network::FilterManager& filter_manager) -> void {
+  return [pass_through_filter_config, splitter, filter_config](Network::FilterManager& filter_manager) -> void {
     Common::Redis::DecoderFactoryImpl factory;
     filter_manager.addReadFilter(std::make_shared<ProxyFilter>(
         factory, Common::Redis::EncoderPtr{new Common::Redis::EncoderImpl()}, *splitter,
         filter_config));
+    filter_manager.addReadFilter(std::make_shared<PassThroughFilter>(
+        factory, Common::Redis::EncoderPtr{new Common::Redis::EncoderImpl()}, *splitter,
+        pass_through_filter_config));
   };
 }
 
