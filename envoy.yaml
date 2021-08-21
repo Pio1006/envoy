@@ -23,36 +23,6 @@ static_resources:
             settings:
               op_timeout: 60s
               enable_redirection: true
-            adaptive_concurrency:
-              gradient_controller_config:
-                sample_aggregate_percentile:
-                  value: 90
-                concurrency_limit_params:
-                  concurrency_update_interval: 0.1s
-                min_rtt_calc_params:
-                  jitter:
-                    value: 10
-                  interval: 60s
-                  request_count: 50
-              enabled:
-                default_value: true
-                runtime_key: "adaptive_concurrency.enabled"
-            faults:
-              - fault_type: DELAY
-                fault_enabled:
-                  default_value:
-                    numerator: 20
-                    denominator: HUNDRED
-                  runtime_key: "bogus_key"
-                delay: 2s
-              - fault_type: DELAY
-                fault_enabled:
-                  default_value:
-                    numerator: 40
-                    denominator: HUNDRED
-                  runtime_key: "key"
-                delay: 6s
-
   clusters:
     - name: cluster_redis
       lb_policy: CLUSTER_PROVIDED

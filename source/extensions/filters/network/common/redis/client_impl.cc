@@ -109,6 +109,8 @@ PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& 
   if (config_.enableCommandStats()) {
     // Only lowercase command and get StatName if we enable command stats
     command = redis_command_stats_->getCommandFromRequest(request);
+    std::string to_lower_command = absl::AsciiStrToLower(request.asString());
+    ENVOY_LOG(debug,"== client make request: command: {}", to_lower_command);
     redis_command_stats_->updateStatsTotal(scope_, command);
   } else {
     // If disabled, we use a placeholder stat name "unused" that is not used
