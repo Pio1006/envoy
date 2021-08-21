@@ -102,6 +102,11 @@ Network::FilterFactoryCb RedisProxyFilterConfigFactory::createFilterFactoryFromP
   };
 }
 
+bool isTerminalFilterByProtoTyped(envoy::extensions::filters::network::redis_proxy::v3::RedisProxy&,
+                                  Server::Configuration::FactoryContext&) {
+  return false;
+}
+
 /**
  * Static registration for the redis filter. @see RegisterFactory.
  */

@@ -12,17 +12,23 @@ namespace Echo {
 /**
  * Implementation of a basic echo filter.
  */
-class EchoFilter : public Network::ReadFilter, Logger::Loggable<Logger::Id::filter> {
+class EchoFilter : public Network::Filter, Logger::Loggable<Logger::Id::filter> {
 public:
   // Network::ReadFilter
-  Network::FilterStatus onData(Buffer::Instance& data, bool end_stream) override;
+  Network::FilterStatus onData(Buffer::Instance& data, bool) override;
   Network::FilterStatus onNewConnection() override { return Network::FilterStatus::Continue; }
-  void initializeReadFilterCallbacks(Network::ReadFilterCallbacks& callbacks) override {
-    read_callbacks_ = &callbacks;
+
+  Network::FilterStatus onWrite(Buffer::Instance& data, bool) override;
+  void initializeReadFilterCallbacks(Network::ReadFilterCallbacks& readCallbacks) override {
+    read_callbacks_ = &readCallbacks;
+  }
+  void initializeWriteFilterCallbacks(Network::WriteFilterCallbacks& writeCallbacks) override {
+    write_callbacks_ = &writeCallbacks;
   }
 
 private:
   Network::ReadFilterCallbacks* read_callbacks_{};
+  Network::WriteFilterCallbacks* write_callbacks_{};
 };
 
 } // namespace Echo

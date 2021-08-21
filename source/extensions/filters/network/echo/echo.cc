@@ -10,11 +10,23 @@ namespace Extensions {
 namespace NetworkFilters {
 namespace Echo {
 
-Network::FilterStatus EchoFilter::onData(Buffer::Instance& data, bool end_stream) {
+Network::FilterStatus EchoFilter::onData(Buffer::Instance& data, bool) {
+  ENVOY_LOG(debug, "===== In echo filter on data");
+  ENVOY_CONN_LOG(debug, "echo: got {} bytes", read_callbacks_->connection(), data.length());
   ENVOY_CONN_LOG(trace, "echo: got {} bytes", read_callbacks_->connection(), data.length());
-  read_callbacks_->connection().write(data, end_stream);
-  ASSERT(0 == data.length());
-  return Network::FilterStatus::StopIteration;
+  ENVOY_LOG(debug, "===== In echo filter on data. continue with the filter iteration");
+  // read_callbacks_->connection().write(data, end_stream);
+  // ASSERT(0 == data.length());
+  return Network::FilterStatus::Continue;
+}
+
+Network::FilterStatus EchoFilter::onWrite(Buffer::Instance& data, bool){
+  ENVOY_LOG(debug, "===== In echo filter on write");
+  ENVOY_CONN_LOG(debug, "echo: got {} bytes", write_callbacks_->connection(), data.length());
+  ENVOY_CONN_LOG(trace, "echo: got {} bytes", write_callbacks_->connection(), data.length());
+  ENVOY_LOG(debug, "===== In echo filter on write. continue with the filter iteration");
+  return Network::FilterStatus::Continue;
+
 }
 
 } // namespace Echo
