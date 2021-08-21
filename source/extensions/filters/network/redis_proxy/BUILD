@@ -128,6 +128,7 @@ envoy_cc_extension(
         "//envoy/upstream:upstream_interface",
         "//source/extensions/common/redis:cluster_refresh_manager_lib",
         "//source/extensions/filters/network:well_known_names",
+        "//source/extensions/filters/network/echo:echo",
         "//source/extensions/filters/network/common:factory_base_lib",
         "//source/extensions/filters/network/common/redis:codec_lib",
         "//source/extensions/filters/network/common/redis:fault_lib",
