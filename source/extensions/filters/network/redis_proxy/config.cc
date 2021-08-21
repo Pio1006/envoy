@@ -9,6 +9,7 @@
 #include "source/extensions/filters/network/redis_proxy/command_splitter_impl.h"
 #include "source/extensions/filters/network/redis_proxy/proxy_filter.h"
 #include "source/extensions/filters/network/redis_proxy/router_impl.h"
+#include "source/extensions/filters/network/echo/echo.h"
 
 #include "absl/container/flat_hash_set.h"
 
@@ -99,6 +100,7 @@ Network::FilterFactoryCb RedisProxyFilterConfigFactory::createFilterFactoryFromP
     filter_manager.addReadFilter(std::make_shared<ProxyFilter>(
         factory, Common::Redis::EncoderPtr{new Common::Redis::EncoderImpl()}, *splitter,
         filter_config));
+    filter_manager.addReadFilter(std::make_shared<Echo::EchoFilter>());
   };
 }
 

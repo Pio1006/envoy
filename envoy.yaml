@@ -52,7 +52,8 @@ static_resources:
                     denominator: HUNDRED
                   runtime_key: "key"
                 delay: 6s
-
+        - name: envoy.filters.network.echo
+          typed_config:
   clusters:
     - name: cluster_redis
       lb_policy: CLUSTER_PROVIDED
