@@ -67,7 +67,7 @@ class RedisProxyFilterConfigFactory
           envoy::extensions::filters::network::redis_proxy::v3::RedisProxy,
           envoy::extensions::filters::network::redis_proxy::v3::RedisProtocolOptions> {
 public:
-  RedisProxyFilterConfigFactory() : FactoryBase(NetworkFilterNames::get().RedisProxy, true) {}
+  RedisProxyFilterConfigFactory() : FactoryBase(NetworkFilterNames::get().RedisProxy, false) {}
 
 private:
   Network::FilterFactoryCb createFilterFactoryFromProtoTyped(
