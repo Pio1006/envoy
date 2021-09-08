@@ -42,6 +42,22 @@ const std::string* CacheImpl::writeRequestKey(const RespValue& request) {
     return key;
 }
 
+const std::string* CacheImpl::writeRequestValue(const RespValue& request) {
+    const std::string *value = nullptr;
+
+    if (request.type() == RespType::Array && absl::AsciiStrToLower(request.asArray()[0].asString()) == "set") {
+        value = &(request.asArray()[1].asString());
+    } else if (request.type() == RespType::CompositeArray) {
+        if (absl::AsciiStrToLower(request.asCompositeArray().command()->asString()) == "set") {
+            auto start_index = request.asCompositeArray().begin().index_;
+            value = &(request.asCompositeArray().baseArray()->asArray()[start_index+1].asString());
+        }
+    }
+
+    return value;
+}
+
+
 bool CacheImpl::makeCacheRequest(const RespValue& request) {
     const std::string *key = readRequestKey(request);
     if (key == nullptr) {
@@ -100,6 +116,57 @@ void CacheImpl::set(const RespValue& request, const RespValue& response) {
     values[1].asString() = *key;
     values[2].type(RespType::BulkString);
     values[2].asString() = response.asString();
+
+    // Set a default TTL to ensure that even if we miss an invalidation
+    // message from the server that the value will auto expire.
+    values[3].type(RespType::BulkString);
+    values[3].asString() = "PX";
+    values[4].type(RespType::BulkString);
+    values[4].asString() = cache_ttl_;
+
+    cache_request->type(RespType::Array);
+    cache_request->asArray().swap(values);
+
+    pending_requests_.emplace_back(std::move(new PendingCacheRequest(Operation::Set)));
+
+    client_->makeRequest(*cache_request, *this);
+}
+
+void CacheImpl::set(const RespValue& request) {
+    const std::string *key = writeRequestKey(request);
+    if (key == nullptr) {
+        // non cachable if we can't figure out what the key is
+        return;
+    }
+
+    // Verify key is not in the ignore list for caching. If it is
+    // then don't set value in cache.
+    bool skip_caching = false;
+    for (const auto& prefix : ignore_key_prefixes_) {
+      if (key->rfind(prefix, 0) != std::string::npos) {
+        skip_caching = true;
+        break;
+      }
+    }
+
+    if (skip_caching) {
+        return;
+    }
+
+    const std::string *value = writeRequestValue(request);
+    if (key == nullptr) {
+        // non cachable if we can't figure out what the key is
+        return;
+    }
+
+    RespValuePtr cache_request(new RespValue());
+    std::vector<RespValue> values(5);
+    values[0].type(RespType::BulkString);
+    values[0].asString() = "SET";
+    values[1].type(RespType::BulkString);
+    values[1].asString() = *key;
+    values[2].type(RespType::BulkString);
+    values[2].asString() = *value;
 
     // Set a default TTL to ensure that even if we miss an invalidation
     // message from the server that the value will auto expire.

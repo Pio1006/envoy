@@ -113,6 +113,10 @@ private:
       return 1;
     }
 
+    NetworkFilters::Common::Redis::Client::CachePolicy cachePolicy() const override {
+      return NetworkFilters::Common::Redis::Client::CachePolicy::ReadThrough;
+    }
+
     // Extensions::NetworkFilters::Common::Redis::Client::ClientCallbacks
     void onResponse(NetworkFilters::Common::Redis::RespValuePtr&& value) override;
     void onFailure() override;

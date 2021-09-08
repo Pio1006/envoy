@@ -118,6 +118,11 @@ using ClientPtr = std::unique_ptr<Client>;
 enum class ReadPolicy { Primary, PreferPrimary, Replica, PreferReplica, Any };
 
 /**
+ * Cache policy to use for local cache.
+ */
+enum class CachePolicy { ReadThrough, ReadWriteThrough };
+
+/**
  * Configuration for a redis connection pool.
  */
 class Config {
@@ -231,6 +236,11 @@ public:
    * it is shared between all upstream nodes.
    */
   virtual uint32_t cacheShards() const PURE;
+
+  /**
+   * @return the cache policy the proxy should use.
+   */
+  virtual CachePolicy cachePolicy() const PURE;
 };
 
 using ConfigSharedPtr = std::shared_ptr<Config>;
@@ -273,6 +283,7 @@ public:
   ~Cache() override = default;
 
   virtual bool makeCacheRequest(const RespValue& request) PURE;
+  virtual void set(const RespValue& request) PURE;
   virtual void set(const RespValue& request, const RespValue& response) PURE;
   virtual void invalidate(const RespValue& keys) PURE;
   virtual void expire(const RespValue& request) PURE;

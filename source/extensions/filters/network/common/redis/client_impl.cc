@@ -93,6 +93,18 @@ ConfigImpl::ConfigImpl(
     NOT_REACHED_GCOVR_EXCL_LINE;
     break;
   }
+
+  switch (config.cache_policy()) {
+    case envoy::extensions::filters::network::redis_proxy::v3::RedisProxy::ConnPoolSettings::READ_THROUGH:
+      cache_policy_ = CachePolicy::ReadThrough;
+      break;
+    case envoy::extensions::filters::network::redis_proxy::v3::RedisProxy::ConnPoolSettings::READ_WRITE_THROUGH:
+      cache_policy_ = CachePolicy::ReadWriteThrough;
+      break;
+    default:
+      NOT_REACHED_GCOVR_EXCL_LINE;
+      break;
+  }
 }
 
 ClientPtr ClientImpl::create(Upstream::HostConstSharedPtr host, Event::Dispatcher& dispatcher,
@@ -166,9 +178,13 @@ PoolRequest* ClientImpl::makeRequest(const RespValue& request, ClientCallbacks& 
     return pending_cache_requests_.back().get();
   }
 
-  // Send invalidation to the cache if we're doing a set and key is cacheable
+  // Send request to cache
   if (cache_) {
-    cache_->expire(request);
+    if (config_.cachePolicy() == CachePolicy::ReadThrough) {
+      cache_->expire(request);
+    } else {
+      cache_->set(request);
+    }
   }
 
   if (config_.enableCommandStats()) {

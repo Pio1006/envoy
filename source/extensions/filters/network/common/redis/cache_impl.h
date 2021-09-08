@@ -30,6 +30,7 @@ public:
   }
   ~CacheImpl() override;
   bool makeCacheRequest(const RespValue& request) override;
+  void set(const RespValue& request) override;
   void set(const RespValue& request, const RespValue& response) override;
   void invalidate(const RespValue& keys) override;
   void expire(const RespValue& request) override;
@@ -56,6 +57,7 @@ private:
   const std::string* readRequestKey(const RespValue& request);
   const std::string* writeRequestKey(const RespValue& request);
   void selectDatabase(int db);
+  const std::string* writeRequestValue(const RespValue& request);
 
   struct PendingCacheRequest : public Client::PoolRequest {
     PendingCacheRequest(const Operation op);
